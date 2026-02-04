@@ -32,6 +32,7 @@ SOLUTION = [
 
 # store generated games so /check can validate by id
 GAMES = {}
+LEADERBOARD = []  # list of dicts: {'name','time','id','when'}
 
 def generate_puzzle(prefilled=30):
     indices = list(range(81))
@@ -88,7 +89,39 @@ def check_solution():
                 mistakes.append([r, c])
     if mistakes:
         return jsonify({'status': 'fail', 'mistakes': mistakes})
+    # success: do not automatically record score here; client may submit via /score
     return jsonify({'status': 'success'})
+
+
+@app.route('/solution')
+def get_solution():
+    gid = request.args.get('id')
+    solution = GAMES.get(gid)
+    if not solution:
+        # fall back to canonical
+        solution = SOLUTION
+    return jsonify({'solution': solution})
+
+
+@app.route('/score', methods=['POST'])
+def submit_score():
+    data = request.json or {}
+    name = data.get('name', 'Anonymous')[:32]
+    try:
+        tm = float(data.get('time', 0))
+    except Exception:
+        tm = 0
+    gid = data.get('id')
+    entry = {'name': name, 'time': tm, 'id': gid}
+    LEADERBOARD.append(entry)
+    return jsonify({'status': 'ok'})
+
+
+@app.route('/leaderboard')
+def leaderboard():
+    # return top 20 by time (ascending)
+    sorted_list = sorted(LEADERBOARD, key=lambda e: e.get('time', 0))
+    return jsonify({'leaders': sorted_list[:20]})
 
 
 if __name__ == '__main__':

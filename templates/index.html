@@ -13,53 +13,73 @@
         <h1>The Sudoko Game</h1>
         <div class="dev-credit">Developed by Ashbi</div>
     </div>
-    <div class="controls">
-        <div class="controls-left">
-            <button id="newGameBtn" class="btn primary">New Game</button>
-        </div>
-        <div class="controls-center">
-            <button id="prevBtn" class="btn nav" disabled>◀ Prev</button>
-            <span id="puzzleLabel" class="badge">1 / 1</span>
-            <button id="nextBtn" class="btn nav" disabled>Next ▶</button>
-        </div>
-        <div class="controls-right">
-            <!-- reserved for future controls -->
-        </div>
-    </div>
 </header>
 
-<main class="card">
-    <div class="meta">
-        <div id="timer">Time: 0s</div>
-        <div id="difficulty">Difficulty: Default</div>
-    </div>
+<main class="layout">
+    <section class="board-card">
+        <div class="board-header">
+            <div class="board-title">Sudoku Board</div>
+            <div class="board-controls">
+                <button id="prevBtn" class="btn nav" disabled title="Previous puzzle">◀</button>
+                <span id="puzzleLabel" class="badge">1 / 1</span>
+                <button id="nextBtn" class="btn nav" disabled title="Next puzzle">▶</button>
+            </div>
+        </div>
 
-    <div id="sudoku-container">
-        <table id="sudoku">
-        {% for row in range(9) %}
-        <tr>
-        {% for col in range(9) %}
-        <td>
-        {% if puzzle[row][col] != 0 %}
-        <input type="text" value="{{ puzzle[row][col] }}" disabled class="cell fixed">
-        {% else %}
-        <input type="text" maxlength="1" class="cell">
-        {% endif %}
-        </td>
-        {% endfor %}
-        </tr>
-        {% endfor %}
-        </table>
-    </div>
+        <div id="sudoku-wrap">
+            <table id="sudoku">
+            {% for row in range(9) %}
+            <tr>
+            {% for col in range(9) %}
+            <td>
+            {% if puzzle[row][col] != 0 %}
+            <input type="text" value="{{ puzzle[row][col] }}" disabled class="cell fixed">
+            {% else %}
+            <input type="text" maxlength="1" class="cell">
+            {% endif %}
+            </td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
 
-    <div class="actions">
-        <button id="checkBtn">Check Solution</button>
-        <button id="resetBtn">Reset Current</button>
-    </div>
+        <div id="message" class="message"></div>
+    </section>
 
-    <p id="message"></p>
+    <aside class="sidebar">
+        <div class="panel">
+            <div class="meta-row"><strong id="timer">Time:</strong></div>
+            <div class="meta-row">Difficulty: <span id="difficulty">Default</span></div>
+        </div>
+
+        <div class="panel actions">
+            <button id="newGameBtn" class="btn primary large">New Game</button>
+            <button id="checkBtn" class="btn success large">Check</button>
+            <button id="resetBtn" class="btn neutral large">Reset</button>
+            <button id="showSolBtn" class="btn large">Show Solution</button>
+        </div>
+
+        <div class="panel">
+            <label class="label">Your name</label>
+            <input id="playerName" class="player-name" placeholder="Player name" maxlength="24">
+        </div>
+
+        <div class="panel">
+            <button id="leaderboardBtn" class="btn neutral">Leaderboard</button>
+        </div>
+
+        <div class="footer-note">Developed by Ashbi</div>
+    </aside>
 </main>
 
 <script src="/static/script.js"></script>
+<div id="leaderboardPanel" class="leaderboard-panel" aria-hidden="true">
+    <div class="leaderboard-content">
+        <button id="closeLeaderboard" class="btn nav">Close</button>
+        <h3>Leaderboard</h3>
+        <ol id="leaderList"></ol>
+    </div>
+</div>
 </body>
 </html>
