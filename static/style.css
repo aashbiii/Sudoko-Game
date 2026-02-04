@@ -1,0 +1,340 @@
+:root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --accent: #2b7a78;
+    --muted: #6b7280;
+    --danger: #ff6b6b;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Poppins, Inter, Arial, sans-serif;
+    background: linear-gradient(180deg, #eef6f9, var(--bg));
+    color: #0f172a;
+    margin: 0;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.top {
+    width: 100%;
+    max-width: 920px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.top h1 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: -0.2px;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px
+}
+
+.dev-credit {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    opacity: 0.9
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.controls-left {
+    display: flex;
+    align-items: center
+}
+
+.controls-center {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.controls-right {
+    display: flex;
+    align-items: center
+}
+
+/* Button system */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px
+}
+
+.btn:focus {
+    outline: 2px solid rgba(43, 122, 120, 0.12)
+}
+
+.btn.primary {
+    background: linear-gradient(180deg, #2b7a78, #256c69);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(43, 122, 120, 0.12)
+}
+
+.btn.nav {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(11, 22, 33, 0.04);
+    padding: 6px 10px;
+    border-radius: 8px
+}
+
+.btn.nav[disabled] {
+    opacity: 0.45;
+    cursor: default
+}
+
+.btn.success {
+    background: linear-gradient(180deg, #1bb85c, #15a84d);
+    color: #fff
+}
+
+.btn.neutral {
+    background: #fff;
+    border: 1px solid #e6edf3;
+    color: var(--muted)
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #fff, #f6fbfb);
+    border: 1px solid rgba(11, 22, 33, 0.04);
+    font-weight: 700;
+    color: var(--muted)
+}
+
+.controls input[type=number] {
+    width: 64px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db
+}
+
+.controls button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+/* New subtle hover & animated styles */
+.controls button {
+    transition: transform .12s ease, box-shadow .12s ease, background .18s ease;
+}
+
+.controls button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(43, 122, 120, 0.12);
+}
+
+.card {
+    transition: transform .24s ease, box-shadow .24s ease;
+}
+
+.card.pop {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+/* table fade animation */
+#sudoku {
+    transition: opacity .28s ease, transform .28s ease;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeUp .28s forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* input focus & hover */
+#sudoku input {
+    transition: border-color .12s ease, box-shadow .12s ease, background .18s ease;
+}
+
+#sudoku input:focus {
+    box-shadow: 0 6px 16px rgba(43, 122, 120, 0.06);
+    border-color: rgba(43, 122, 120, 0.5);
+}
+
+/* subtle gradients for action buttons */
+.actions button {
+    background: linear-gradient(180deg, #fff, #fbfdff);
+    border: 1px solid rgba(11, 22, 33, 0.04);
+}
+
+.actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(11, 22, 33, 0.06);
+}
+
+/* mistakes animation */
+.cell.invalid {
+    animation: shake .36s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0)
+    }
+
+    20% {
+        transform: translateX(-6px)
+    }
+
+    40% {
+        transform: translateX(6px)
+    }
+
+    60% {
+        transform: translateX(-4px)
+    }
+
+    80% {
+        transform: translateX(4px)
+    }
+
+    100% {
+        transform: translateX(0)
+    }
+}
+
+.card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    width: 100%;
+    max-width: 920px
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px
+}
+
+#timer {
+    font-weight: 600;
+    color: var(--muted)
+}
+
+#sudoku {
+    margin: auto;
+    border-collapse: collapse
+}
+
+#sudoku td {
+    padding: 0
+}
+
+#sudoku input {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #cbd5e1
+}
+
+#sudoku input.fixed {
+    background: #eef2ff;
+    font-weight: 700;
+    color: #0f172a
+}
+
+#sudoku input:focus {
+    outline: 2px solid rgba(43, 122, 120, 0.15)
+}
+
+/* Thicker borders for 3x3 blocks */
+#sudoku tr td:nth-child(3n) {
+    border-right: 2px solid #0f172a
+}
+
+#sudoku tr:nth-child(3n) td {
+    border-bottom: 2px solid #0f172a
+}
+
+#sudoku tr td:nth-child(1) {
+    border-left: 2px solid #0f172a
+}
+
+#sudoku tr:nth-child(1) td {
+    border-top: 2px solid #0f172a
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px
+}
+
+.actions button {
+    min-width: 140px
+}
+
+.actions .btn {
+    min-width: 140px
+}
+
+.actions {
+    margin-top: 18px
+}
+
+
+#message {
+    margin-top: 12px;
+    font-weight: 700;
+    text-align: center
+}
+
+.cell.invalid {
+    background: var(--danger);
+    color: #fff
+}
+
+@media (max-width:600px) {
+    #sudoku input {
+        width: 36px;
+        height: 36px;
+        font-size: 16px
+    }
+}

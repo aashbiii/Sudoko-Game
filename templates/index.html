@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Sudoko Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+
+<header class="top">
+    <div class="brand">
+        <h1>The Sudoko Game</h1>
+        <div class="dev-credit">Developed by Ashbi</div>
+    </div>
+    <div class="controls">
+        <div class="controls-left">
+            <button id="newGameBtn" class="btn primary">New Game</button>
+        </div>
+        <div class="controls-center">
+            <button id="prevBtn" class="btn nav" disabled>◀ Prev</button>
+            <span id="puzzleLabel" class="badge">1 / 1</span>
+            <button id="nextBtn" class="btn nav" disabled>Next ▶</button>
+        </div>
+        <div class="controls-right">
+            <!-- reserved for future controls -->
+        </div>
+    </div>
+</header>
+
+<main class="card">
+    <div class="meta">
+        <div id="timer">Time: 0s</div>
+        <div id="difficulty">Difficulty: Default</div>
+    </div>
+
+    <div id="sudoku-container">
+        <table id="sudoku">
+        {% for row in range(9) %}
+        <tr>
+        {% for col in range(9) %}
+        <td>
+        {% if puzzle[row][col] != 0 %}
+        <input type="text" value="{{ puzzle[row][col] }}" disabled class="cell fixed">
+        {% else %}
+        <input type="text" maxlength="1" class="cell">
+        {% endif %}
+        </td>
+        {% endfor %}
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div class="actions">
+        <button id="checkBtn">Check Solution</button>
+        <button id="resetBtn">Reset Current</button>
+    </div>
+
+    <p id="message"></p>
+</main>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
